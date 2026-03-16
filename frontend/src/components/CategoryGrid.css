@@ -1,0 +1,293 @@
+/* ============================
+   GLOBAL RESET
+   ============================ */
+
+html, body{
+  margin:0;
+  padding:0;
+  width:100%;
+  overflow-x:hidden;
+}
+
+body{
+  font-family:'Montserrat',sans-serif;
+  background:#000;
+}
+
+/* ============================
+   SECTION
+   ============================ */
+
+.category-section{
+  width:100%;
+  padding:4rem 1rem;
+  display:flex;
+  justify-content:center;
+  position:relative;
+  scroll-behavior:smooth;
+}
+
+/* Premium fade edges */
+
+.category-section::before,
+.category-section::after{
+  content:"";
+  position:absolute;
+  left:0;
+  width:100%;
+  height:120px;
+  pointer-events:none;
+  z-index:0;
+}
+
+.category-section::before{
+  top:0;
+  background:linear-gradient(to bottom, black, transparent);
+}
+
+.category-section::after{
+  bottom:0;
+  background:linear-gradient(to top, black, transparent);
+}
+
+/* ============================
+   GRID DESKTOP
+   ============================ */
+
+.category-grid{
+  width:100%;
+  max-width:1200px;
+  margin:0 auto;
+
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+
+  gap:3rem; /* prevents overlap */
+}
+
+/* ============================
+   CATEGORY CARD
+   ============================ */
+
+.category-card{
+  position:relative;
+  z-index:2;
+  height:320px;
+
+  border-radius:22px;
+  overflow:hidden;
+
+  background-size:105%;
+  background-position:center;
+
+  cursor:pointer;
+  text-decoration:none;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  border:2px solid rgba(255,255,255,0.15);
+
+  transform:scale(.95);
+  opacity:.75;
+
+  will-change:transform;
+  transform-origin:center;
+
+  transition:
+  transform .45s ease,
+  opacity .4s ease,
+  background-size .6s ease,
+  box-shadow .4s ease,
+  border .4s ease;
+}
+
+/* Hover animation */
+
+.category-card:hover{
+  transform:scale(1.04);
+  opacity:1;
+
+  box-shadow:0 20px 45px rgba(0,0,0,.35);
+
+  border:2px solid rgba(255,255,255,.45);
+}
+
+/* ============================
+   ACTIVE CARD
+   ============================ */
+
+.category-card.active{
+  transform:scale(1.05);
+  opacity:1;
+  background-size:115%;
+  z-index:3;
+
+  box-shadow:0 25px 60px rgba(0,0,0,.35);
+}
+
+/* ============================
+   GLASS OVERLAY
+   ============================ */
+
+.glass-overlay{
+  position:absolute;
+  inset:0;
+
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+
+  background:rgba(0,0,0,.25);
+
+  z-index:1;
+
+  transition:
+  backdrop-filter .4s ease,
+  background .4s ease;
+}
+
+/* Remove blur on hover */
+
+.category-card:hover .glass-overlay{
+  backdrop-filter:blur(0);
+  -webkit-backdrop-filter:blur(0);
+  background:rgba(0,0,0,0);
+}
+
+/* Remove blur when active */
+
+.category-card.active .glass-overlay{
+  backdrop-filter:blur(0);
+  -webkit-backdrop-filter:blur(0);
+  background:rgba(0,0,0,0);
+}
+
+/* ============================
+   TEXT CONTENT
+   ============================ */
+
+.card-content{
+  position:relative;
+  z-index:2;
+  text-align:center;
+}
+
+/* Category title */
+
+.category-card h2{
+  color:#fff;
+
+  font-size:2.8rem;
+  font-weight:500;
+
+  letter-spacing:4px;
+  text-transform:uppercase;
+
+  margin-bottom:.4rem;
+
+  text-shadow:0 6px 25px rgba(0,0,0,.45);
+
+  transition:letter-spacing .35s ease, transform .35s ease;
+}
+
+/* Title expands when active */
+
+.category-card.active h2{
+  letter-spacing:6px;
+  transform:translateY(-2px);
+}
+
+/* Subtitle */
+
+.category-sub{
+  font-size:.8rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+
+  color:rgba(255,255,255,.9);
+
+  margin-bottom:1rem;
+}
+
+/* ============================
+   BUTTON
+   ============================ */
+
+.glass-btn{
+  padding:.8rem 2rem;
+
+  border-radius:40px;
+  border:1px solid rgba(255,255,255,.5);
+
+  background:rgba(255,255,255,.25);
+
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+
+  color:#fff;
+
+  font-size:1rem;
+  letter-spacing:1.5px;
+  font-weight:500;
+
+  transition:all .3s ease;
+}
+
+.glass-btn:hover{
+  background:rgba(255,255,255,.35);
+  border-color:rgba(255,255,255,.7);
+  transform:scale(1.05);
+}
+
+/* ============================
+   MOBILE
+   ============================ */
+
+@media(max-width:768px){
+
+  .category-section{
+    padding:3rem 1rem;
+  }
+
+  .category-grid{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    width:100%;
+    max-width:420px;
+    margin:0 auto;
+
+    gap:2.5rem;
+
+    scroll-snap-type:y mandatory;
+  }
+
+  .category-card{
+    width:100%;
+    max-width:380px;
+
+    margin:0 auto;
+
+    scroll-snap-align:center;
+    scroll-margin-top:20vh;
+  }
+
+  /* Disable hover effects on mobile */
+
+  .category-card:hover{
+    transform:scale(.95);
+    box-shadow:none;
+  }
+
+  .category-card h2{
+    font-size:2.2rem;
+  }
+
+  .glass-btn{
+    font-size:.9rem;
+    padding:.7rem 1.6rem;
+  }
+
+}

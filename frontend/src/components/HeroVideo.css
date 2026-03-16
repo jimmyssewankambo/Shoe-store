@@ -58,3 +58,7 @@
     background: rgba(255,255,255,0.35);
     transform: scale(1.05);
 }
+.hero-video {
+  position: relative;
+  z-index: 1;
+}
